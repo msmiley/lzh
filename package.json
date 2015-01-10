@@ -1,0 +1,25 @@
+{
+  "name": "",
+  "version": "0.1.0",
+  "author": "Mike Smiley <mikesmiley@me.com>",
+  "url": "https://github.com/mikesmiley/",
+  "main": "./lib",
+  "repository": "mikesmiley/npm-template.git",
+  "scripts": {
+    "doc": "cake doc",
+    "prepublish": "cake build test doc",
+    "test": "cake test"
+  },
+  "devDependencies": {
+    "docco": "*",
+    "coffee-script": "^1.8.0",
+    "jasmine-node": "^1.14.5"
+  },
+  "gypfile": true,
+  "dependencies": {
+    "bindings": "~1.2.1"
+  },
+  "keywords": [
+  ],
+  "license": "MIT"
+}

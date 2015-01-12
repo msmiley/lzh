@@ -1,10 +1,10 @@
 {
-  "name": "",
-  "version": "0.1.0",
+  "name": "lzh",
+  "version": "0.0.0",
   "author": "Mike Smiley <mikesmiley@me.com>",
-  "url": "https://github.com/mikesmiley/",
+  "url": "https://github.com/mikesmiley/lzh",
   "main": "./lib",
-  "repository": "mikesmiley/npm-template.git",
+  "repository": "mikesmiley/lzh.git",
   "scripts": {
     "doc": "cake doc",
     "prepublish": "cake build test doc",
@@ -17,9 +17,14 @@
   },
   "gypfile": true,
   "dependencies": {
+    "cpp-debug": "*",
+    "nan": "~1.3.0",
     "bindings": "~1.2.1"
   },
   "keywords": [
+    "lzh",
+    "huffman",
+    "compression"
   ],
   "license": "MIT"
 }

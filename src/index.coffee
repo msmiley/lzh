@@ -1,4 +1,4 @@
 #
 # Directly expose the exports from the C++ addon.
 #
-module.exports = require('bindings')('addon.node')
+module.exports = require('bindings')('lzh.node')

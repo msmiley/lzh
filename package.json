@@ -1,6 +1,6 @@
 {
   "name": "lzh",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Mike Smiley <mikesmiley@me.com>",
   "url": "https://github.com/mikesmiley/lzh",
   "main": "./lib",

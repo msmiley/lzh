@@ -8,7 +8,7 @@
   "scripts": {
     "doc": "cake doc",
     "prepublish": "cake build test doc",
-    "test": "cake test"
+    "test": "cake build test"
   },
   "devDependencies": {
     "docco": "*",

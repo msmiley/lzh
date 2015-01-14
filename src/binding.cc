@@ -15,38 +15,37 @@ extern "C" {
 }
 
 
+// compress
+NAN_METHOD(compress) {
+  NanScope();
 
-// // compress
-// static NAN_METHOD(compress) {
-//   NanScope();
-//
-//   if (args.Length() < 0 || !Buffer::HasInstance(args[0])) {
-//     return NanThrowTypeError("Argument must be a Buffer");
-//   }
-//
-//   // get input Buffer
-//   Local<Object> buf_in = args[0].As<Object>();
-//
-//   unsigned char *in = (unsigned char *)Buffer::Data(buf_in);
-//   size_t inLen = Buffer::Length(buf_in);
-//
-//   // SlowBuffer
-//   Buffer *slowbuf_out = Buffer::New(inLen*2);
-//   unsigned char *out = (unsigned char *)Buffer::Data(slowbuf_out);
-//
-//   unsigned int encodedLen = Encode(in, inLen, out);
-//
-//   // prepare Buffer for trip back to JS-land
-//   Local<Object> globalObj = Context::GetCurrent()->Global();
-//   // get the Buffer constructor
-//   Local<Function> bufferConstructor = Local<Function>::Cast(globalObj->Get(String::New("Buffer")));
-//   // prepare args to Bufer constructor
-//   Handle<Value> constructorArgs[3] = { slowbuf_out->handle_, Integer::New(encodedLen), Integer::New(0) };
-//   // instantiate Buffer
-//   Local<Object> buf_out = bufferConstructor->NewInstance(3, constructorArgs);
-//
-//   NanReturnValue(buf_out);
-// }
+  if (args.Length() < 0 || !Buffer::HasInstance(args[0])) {
+    return NanThrowTypeError("Argument must be a Buffer");
+  }
+
+  // get input Buffer
+  Local<Object> buf_in = args[0]->ToObject();
+
+  unsigned char *in = (unsigned char *)Buffer::Data(buf_in);
+  size_t inLen = Buffer::Length(buf_in);
+
+  // SlowBuffer
+  Buffer *slowbuf_out = Buffer::New(inLen*2);
+  unsigned char *out = (unsigned char *)Buffer::Data(slowbuf_out);
+
+  unsigned int encodedLen = Encode(in, inLen, out);
+
+  // prepare Buffer for trip back to JS-land
+  Local<Object> globalObj = Context::GetCurrent()->Global();
+  // get the Buffer constructor
+  Local<Function> bufferConstructor = Local<Function>::Cast(globalObj->Get(String::New("Buffer")));
+  // prepare args to Bufer constructor
+  Handle<Value> constructorArgs[3] = { slowbuf_out->handle_, Integer::New(encodedLen), Integer::New(0) };
+  // instantiate Buffer
+  Local<Object> buf_out = bufferConstructor->NewInstance(3, constructorArgs);
+
+  NanReturnValue(buf_out);
+}
 
 // decompress
 NAN_METHOD(decompress) {
@@ -60,7 +59,6 @@ NAN_METHOD(decompress) {
   Local<Object> buf_in = args[0]->ToObject();
   unsigned char *in = (unsigned char *)Buffer::Data(buf_in);
   size_t encodedLen = Buffer::Length(buf_in);
-  printf("%d\n", encodedLen);
 
   // get the length so we can size the out Buffer
   uint32_t decodedLen = DecodedLength(in);
@@ -88,8 +86,8 @@ void Initialize(Handle<Object> exports) {
 
   exports->Set(String::NewSymbol("decompress"),
     FunctionTemplate::New(decompress)->GetFunction());
-  // exports->Set(String::NewSymbol("compress"),
-  //   FunctionTemplate::New(compress)->GetFunction());
+  exports->Set(String::NewSymbol("compress"),
+    FunctionTemplate::New(compress)->GetFunction());
 }
 
 NODE_MODULE(lzh, Initialize)

@@ -2,9 +2,9 @@
   "name": "lzh",
   "version": "0.0.3",
   "author": "Mike Smiley <mikesmiley@me.com>",
-  "url": "https://github.com/mikesmiley/lzh",
+  "url": "https://github.com/msmiley/lzh",
   "main": "./lib",
-  "repository": "mikesmiley/lzh.git",
+  "repository": "msmiley/lzh.git",
   "scripts": {
     "doc": "cake doc",
     "prepublish": "cake build test doc",
